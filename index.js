@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-//const path = require('path');
-require('dotenv').config({path:'./.env'});
+const dotenv = require ('dotenv');
+dotenv.config();
 
 const puerto = process.env.PORT || 3000;
 
@@ -15,17 +15,19 @@ const miMiddelware = (req, res, next) => {
 
 
 app.use(miMiddelware)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', (req, res)=>{
     res.sendFile('index.html');
 });
+
 
 app.get('/ofertas', (req, res)=>{
     res.sendFile('ofertas.html');
 });
 
 app.listen(puerto,()=>{
+    //if(err) console.log(err)
     console.log('SERVER RUNING IN PORT: http://localhost:'+ puerto);
 
 });
